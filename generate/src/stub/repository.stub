@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\${MODEL_NAME};
+use Cache;
+class ${MODEL_NAME}Repository extends Repository
+{
+    static $tag = '${CACHE_TAG}';
+
+
+    public function getById($id)
+    {
+        $cacheKey = getCacheKey('${INFO_CACHE_KEY}') . $id;
+        $value = $this->remember($cacheKey, function () use ($id) {
+            return ${MODEL_NAME}::where('id', $id)->first();
+        });
+        return $value;
+    }
+
+
+     public function store($data)
+     {
+        $this->clearCache($this->tag());
+        $res = ${MODEL_NAME}::firstOrCreate($data);
+        return $res;
+     }
+
+
+
+    public function cacheTime()
+    {
+        return config('${CAHCE_TIME_KEY}');
+    }
+
+
+    public function model()
+    {
+        return app(${MODEL_NAME}::class);
+    }
+
+    public function tag()
+    {
+        return self::$tag;
+    }
+}

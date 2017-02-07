@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Admin\Controllers;
+
+use App;
+
+use Encore\Admin\Form;
+use Encore\Admin\Grid;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Layout\Content;
+use App\Http\Controllers\Controller;
+use Encore\Admin\Controllers\ModelForm;
+use App\Models\${MODEL_NAME};
+use ${MODEL_NAME}Service;
+
+class ${MODEL_NAME}Controller extends Controller
+{
+    use ModelForm;
+
+    /**
+     * Index interface.
+     *
+     * @return Content
+     */
+    public function index()
+    {
+        return Admin::content(function (Content $content) {
+            $content->header(trans('backend.${TABLE_NAME}.title.list'));
+            $content->body($this->grid());
+        });
+    }
+
+    /**
+     * Edit interface.
+     *
+     * @param $id
+     * @return Content
+     */
+    public function edit($id)
+    {
+        return Admin::content(function (Content $content) use ($id) {
+            $content->header(trans('backend.${TABLE_NAME}.title.edit'));
+            $content->body($this->form()->edit($id));
+        });
+    }
+
+    /**
+     * Create interface.
+     *
+     * @return Content
+     */
+    public function create()
+    {
+        return Admin::content(function (Content $content) {
+            $content->header(trans('backend.${TABLE_NAME}.title.add'));
+            $content->body($this->form());
+        });
+    }
+
+    /**
+     * Make a grid builder.
+     *
+     * @return Grid
+     */
+    protected function grid()
+    {
+        return Admin::grid(${MODEL_NAME}::class, function (Grid $grid) {
+            ${GRID_CONTENT}
+        });
+    }
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
+        return Admin::form(${MODEL_NAME}::class, function (Form $form) {
+            ${FORM_CONTENT}
+        });
+    }
+}

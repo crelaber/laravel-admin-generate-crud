@@ -1,0 +1,14 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: liao
+ * Date: 2016/11/4
+ * Time: 16:09
+ */
+namespace App\Facades;
+use Illuminate\Support\Facades\Facade;
+class ${MODEL_NAME}Facade extends Facade{
+    protected static function getFacadeAccessor(){
+        return '${MODEL_NAME}Repository';
+    }
+}
