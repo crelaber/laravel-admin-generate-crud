@@ -12,10 +12,7 @@
     "autoload": {
         "psr-4": {
             "Crelaber\\Crud\\": "src/"
-        },
-        "files": [
-            "app/Helper/Helpers.php"
-        ]
+        }
 
     },
     "autoload-dev": {
